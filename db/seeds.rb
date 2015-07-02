@@ -13,6 +13,11 @@ Wiki.destroy_all
   user.skip_confirmation!
   user.save!
 end
+  brad = User.new(
+    name:     Brad Gohman,
+    email:    bradley.s.gohman@gmail.com,
+    password: helloworld
+  )
 users = User.all
 
  # Create Wikis
