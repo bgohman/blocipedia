@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'figaro', '1.0'
 gem 'faker'
+gem 'pundit'
 
 group :production do
    gem 'pg'
