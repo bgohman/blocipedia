@@ -4,24 +4,33 @@ Wiki.destroy_all
  require 'faker'
 
 # Create Users
-5.times do
-  user = User.new(
-    name:     Faker::Name.name,
-    email:    Faker::Internet.email,
-    password: Faker::Lorem.characters(10),
+
+  standard = User.new(
+    name:     "standard user",
+    email:    "standard@example.com",
+    password: "helloworld",
     role:     "standard"
   )
-  user.skip_confirmation!
-  user.save!
-end
-  brad = User.new(
-    name:     "Brad Gohman",
-    email:    "bradley.s.gohman@gmail.com",
+  standard.skip_confirmation!
+  standard.save!
+
+  premium = User.new(
+    name:     "premium user",
+    email:    "premium@example.com",
+    password: "helloworld",
+    role:     "premium"
+  )
+  premium.skip_confirmation!
+  premium.save!  
+
+  admin = User.new(
+    name:     "admin user",
+    email:    "admin@example.com",
     password: "helloworld",
     role:     "admin"
   )
-  brad.skip_confirmation!
-  brad.save!
+  admin.skip_confirmation!
+  admin.save!
 users = User.all
 
  # Create Wikis

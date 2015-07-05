@@ -6,6 +6,10 @@ class ApplicationPolicy
     @record = record
   end
 
+  def premium?
+    user.present? && user.premium?
+  end
+
   def index?
     false
   end

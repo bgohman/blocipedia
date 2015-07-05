@@ -4,6 +4,7 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Wikis", wikis_path %></li>
         <% if logged_in? %>
           <li class="dropdown">
               <li><%= link_to (current_user.name || current_user.email), edit_user_registration_path(current_user) %></li>

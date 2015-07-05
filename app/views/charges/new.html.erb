@@ -1,0 +1,34 @@
+<h1>Upgrade to premium</h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <p>Become a premium member of blocipedia!</p>
+      <ul>
+        <li>placeholder benefit 1.</li>
+        <li>placeholder benefit 2.</li>
+        <li>placeholder benefit 3.</li>
+      </ul>
+
+  <%= link_to "Never mind...", new_wiki_path %>
+  </div>
+
+<div class="col-md-8">
+
+  <%= form_tag charges_path do %>
+    <article>
+      <label class="amount">
+        <span>Amount: $15.00</span></br>
+      </label>
+    </article>
+
+    <script src="https://checkout.stripe.com/checkout.js"
+            class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="<%= @stripe_btn_data[:description] %>"
+            data-amount=<%= @stripe_btn_data[:amount] %> >
+    </script>
+  <% end %></br>
+
+
+
+</div>

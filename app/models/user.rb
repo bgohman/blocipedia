@@ -6,7 +6,15 @@ class User < ActiveRecord::Base
   after_initialize :init
 
   def init
-    self.role = 'standard'
+    self.role ||= 'standard'
+  end
+
+  def upgrade
+    update_attribute(:role, 'premium')
+  end
+
+  def downgrade
+    update_attribute(:role, 'standard')
   end
 
   def admin?
