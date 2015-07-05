@@ -1,11 +1,15 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.all
-    authorize @wikis
+    @public_wikis = Wiki.publicly_viewable
+    @user_wikis = current_user.wikis
+    authorize @public_wikis
+    authorize @user_wikis
+    @wikis = (@public_wikis + @user_wikis).uniq.sort_by &:created_at
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def new
@@ -16,6 +20,7 @@ class WikisController < ApplicationController
 
   def create
     @wiki = Wiki.new(wiki_params)
+    @wiki.user = current_user
     authorize @wiki
     if @wiki.save
       flash[:notice] = "Wiki was saved."

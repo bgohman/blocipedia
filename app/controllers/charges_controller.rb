@@ -22,7 +22,7 @@ class ChargesController < ApplicationController
     )
   
   current_user.update_attribute(:role, "premium")
-  flash[:success] = "Thank you for supporting blocipedia, #{current_user.email}!"
+  flash[:notice] = "Thank you for supporting blocipedia, #{current_user.email}!"
   redirect_to root_path
 
   rescue Stripe::CardError => e

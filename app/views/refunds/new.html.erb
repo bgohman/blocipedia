@@ -13,7 +13,11 @@
   </div>
 
 <div class="col-md-8">
+  <P> Are you sure? </p>
+  <p>By cancelling your premium subscription you will lose the ability to create private wikis.</p>
+  <p>All of your private wikis will become public.  The will be completely open for viewing and updating.</p>
 
+  <%= link_to "No, I don't want to do that.", root_path %></br>
   <%= link_to "Yes, I am sure.  Cancel my premium account", refunds_path, method: :post %>
 
 
