@@ -5,6 +5,6 @@
 <% if policy(@wiki).edit? %>
   <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn' %>
 <% end %>
-<% if policy(@wiki).edit? %>
+<% if policy(@wiki).destroy? %>
   <%= link_to "Delete", @wiki, method: :delete, class: 'btn', data: { confirm: 'Are you sure?' } %>
 <% end %>
