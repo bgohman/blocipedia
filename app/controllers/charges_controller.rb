@@ -21,7 +21,8 @@ class ChargesController < ApplicationController
       :currency => 'usd'
     )
   
-  current_user.update(role:, "premium")
+  current_user.charges.create(charge_id: charge.id)
+  current_user.update(role: "premium")
   flash[:notice] = "Thank you for supporting blocipedia, #{current_user.email}!"
   redirect_to root_path
 
