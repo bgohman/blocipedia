@@ -10,5 +10,5 @@ Rails.application.routes.draw do
 
   resources :charges, only: [:new, :create]
   resources :refunds, only: [:new, :create]
-
+  resources :collaborations, only: [:create, :destroy]
 end

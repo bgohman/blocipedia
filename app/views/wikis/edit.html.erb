@@ -8,6 +8,18 @@
         <li>placeholder instruction 2.</li>
         <li>placeholder instruction 3.</li>
       </ul>
+    <h4> Wiki Collaborators</h4>
+    <% @collaborations.each do |collaboration| %>
+      <p><%= collaboration.user.name %> | <%= link_to "remove this collaborator", collaboration_path, method: :delete, data: { confirm: "Are you sure?" }  %></p>
+    <% end %>    
+    <%= form_for(@wiki.collaborations.build) do |f| %>
+    <div class="form-group">
+      <div><%= hidden_field_tag :wiki_id, @wiki.id %></div>
+      <%= f.label "Add collaborators:" %>
+      <%= f.text_field :user_id, class: 'form-control', placeholder: "enter the user's email" %>
+      <%= f.submit "Add" %>
+    </div>
+    <% end %>
   </div>
 
   <div class="col-md-8">
@@ -22,10 +34,12 @@
     </div>
     <div class="form-group">
     <% if policy(Wiki.new).premium? %>
-      <div class="form-group">
-      <%= f.label :private %>
-      <%= f.check_box :private, class: 'form-control' %>
-      </div>
+      <% if current_user == @wiki.user %>
+        <div class="form-group">
+        <%= f.label :private %>
+        <%= f.check_box :private, class: 'form-control' %>
+        </div>
+      <% end %>
     <% else %>
       <%= link_to "Upgrade to a premium account?", new_charge_path %></br>
     <% end %>

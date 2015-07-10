@@ -9,4 +9,6 @@ class WikiPolicy < ApplicationPolicy
     true
   end
 
+
+
 end

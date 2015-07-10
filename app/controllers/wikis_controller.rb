@@ -21,6 +21,7 @@ class WikisController < ApplicationController
   def create
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
+    @wiki.private ||= false
     authorize @wiki
     if @wiki.save
       flash[:notice] = "Wiki was saved."
@@ -34,6 +35,9 @@ class WikisController < ApplicationController
   def edit
     @wiki = Wiki.find(params[:id])
     authorize @wiki
+    #@collaborators = User.where(id: [@wiki.collaborations.map{|c| c.user_id}.join] )
+    @collaborations = @wiki.collaborations
+
   end
 
   def update
