@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def edit?
-    update?
+    create?
   end
 
   def destroy?

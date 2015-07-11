@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20150710124545) do
   end
 
   add_index "collaborations", ["id"], name: "index_collaborations_on_id", unique: true
+  add_index "collaborations", ["user_id", "wiki_id"], name: "index_collaborations_on_user_id_and_wiki_id", unique: true
   add_index "collaborations", ["user_id"], name: "index_collaborations_on_user_id"
   add_index "collaborations", ["wiki_id"], name: "index_collaborations_on_wiki_id"
 

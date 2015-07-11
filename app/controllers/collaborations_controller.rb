@@ -8,9 +8,9 @@ class CollaborationsController < ApplicationController
     @wiki = Wiki.find(params[:wiki_id])
     @other_user = User.find_by email: params[:collaboration][:user_id]
     @collaboration = Collaboration.new(collaboration_params)
+    authorize @collaboration
     @collaboration.user_id = @other_user.id
     @collaboration.wiki_id = @wiki.id
-    authorize @collaboration
     if @collaboration.save
       flash[:notice] = "#{@other_user.name} has been added as a collaborator for this wiki."
       redirect_to edit_wiki_path(@wiki)

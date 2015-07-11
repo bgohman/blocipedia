@@ -7,6 +7,7 @@ class CreateCollaborations < ActiveRecord::Migration
     end
 
     add_index :collaborations, :id, unique: true
+    add_index :collaborations, [ :user_id, :wiki_id ], unique: true
     add_index :collaborations, :user_id
     add_index :collaborations, :wiki_id
   end

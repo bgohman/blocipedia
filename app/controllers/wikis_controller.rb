@@ -1,10 +1,6 @@
 class WikisController < ApplicationController
   def index
-    @public_wikis = Wiki.publicly_viewable
-    @user_wikis = current_user.wikis
-    authorize @public_wikis
-    authorize @user_wikis
-    @wikis = (@public_wikis + @user_wikis).uniq.sort_by &:created_at
+    @wikis = policy_scope(Wiki)
   end
 
   def show
