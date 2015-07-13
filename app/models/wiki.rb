@@ -5,5 +5,8 @@ class Wiki < ActiveRecord::Base
 
   scope :publicly_viewable, -> { where(private: false) }
 
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
 
 end

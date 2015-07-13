@@ -16,6 +16,7 @@ gem 'pundit'
 gem 'stripe'
 gem 'redcarpet'
 gem 'haml'
+gem 'friendly_id', '~> 5.1.0'
 
 group :production do
    gem 'pg'
