@@ -1,0 +1,43 @@
+%h1 Edit Wiki
+
+.row
+  .col-md-4
+    %p 
+      Edit this wiki
+      %ul
+        %li placeholder instruction 1.
+        %li placeholder instruction 2.
+        %li placeholder instruction 3.
+    %h4 
+      Wiki Collaborators
+    - @collaborations.each do |collaboration|
+      %p
+        = collaboration.user.name 
+        | 
+        = link_to "remove this collaborator", collaboration_path, method: :delete, data: { confirm: "Are you sure?" }   
+    = form_for(@wiki.collaborations.build) do |f|
+      .form-group
+        = hidden_field_tag :wiki_id, @wiki.id
+        = f.label "Add collaborators:"
+        = f.text_field :user_id, class: 'form-control', placeholder: "enter the user's email"
+        = f.submit "Add"
+
+  .col-md-8
+    = form_for @wiki do |f|
+      .form-group
+        = f.label :title
+        = f.text_field :title, class: 'form-control', placeholder: "wiki title"
+      .form-group
+        = f.label :body
+        = f.text_area :body, rows: 8, class: 'form-control', placeholder: "wiki body..."
+      .form-group
+        - if policy(Wiki.new).premium?
+          - if current_user == @wiki.user
+            .form-group
+              = f.label :private
+              = f.check_box :private, class: 'form-control'
+        -else
+          = link_to "Upgrade to a premium account?", new_charge_path
+          %br
+        = f.submit "Save", class: 'btn btn-success'
+

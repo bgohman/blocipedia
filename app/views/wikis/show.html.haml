@@ -1,0 +1,8 @@
+%h1= markdown_to_html @wiki.title
+
+%p= markdown_to_html @wiki.body
+
+- if policy(@wiki).edit?
+  = link_to "Edit", edit_wiki_path(@wiki), class: 'btn'
+- if policy(@wiki).destroy?
+  = link_to "Delete", @wiki, method: :delete, class: 'btn', data: { confirm: 'Are you sure?' }

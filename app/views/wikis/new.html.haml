@@ -1,0 +1,31 @@
+%h1 New Wiki
+
+.row
+  .col-md-4
+    %p
+      Make a new wiki
+      %ul
+        %li placeholder instruction 1.
+        %li placeholder instruction 2.
+        %li placeholder instruction 3.
+
+  - unless policy(Wiki.new).premium?
+    = link_to "Upgrade to a premium account", new_charge_path
+
+  .col-md-8
+    = form_for @wiki do |f|
+      .form-group
+        = f.label :title
+        = f.text_field :title, class: 'form-control', placeholder: "wiki title"
+      .form-group
+        = f.label :body
+        = f.text_area :body, rows: 8, class: 'form-control', placeholder: "wiki body..."
+      - if policy(Wiki.new).premium?
+        .form-group
+          = f.label :private
+          = f.check_box :private, class: 'form-control'
+      - else
+        = link_to "Upgrade to a premium account?", new_charge_path
+        %br
+
+      = f.submit "Save", class: 'btn btn-success'
