@@ -1,7 +1,7 @@
 class WikiPolicy < ApplicationPolicy
 
   def show?
-    user.present? && (user.admin? ||  record.user == user || record.users.include?(user))
+    user.present? && (user.admin? ||  record.user == user || record.users.include?(user) || !record.private? )
   end
 
  class Scope
