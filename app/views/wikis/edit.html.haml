@@ -24,12 +24,15 @@
 
   .col-md-8
     = form_for @wiki do |f|
-      .form-group
-        = f.label :title
-        = f.text_field :title, class: 'form-control', placeholder: "wiki title"
-      .form-group
-        = f.label :body
-        = f.text_area :body, rows: 8, class: 'form-control', placeholder: "wiki body..."
+      #epiceditor
+        %script{:src => "app/assets/javascripts/epiceditor.min.js"}
+        var editor = new EpicEditor().load();
+        .form-group
+          = f.label :title
+          = f.text_field :title, class: 'form-control', placeholder: "wiki title"
+        .form-group
+          = f.label :body
+          = f.text_area :body, rows: 8, class: 'form-control', placeholder: "wiki body..."
       .form-group
         - if policy(Wiki.new).premium?
           - if current_user == @wiki.user
@@ -40,4 +43,8 @@
           = link_to "Upgrade to a premium account?", new_charge_path
           %br
         = f.submit "Save", class: 'btn btn-success'
+
+
+
+
 
