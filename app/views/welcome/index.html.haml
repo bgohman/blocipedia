@@ -1,2 +1,14 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.erb
+%br
+.jumbotron
+  %h1 Blocipedia
+  %p Make your own public and private wiki articles.
+  %p
+    - if logged_in?
+      = link_to "View wikis", wikis_path
+      or
+      = link_to "Make a new Wiki", new_wiki_path
+    - else
+      = link_to "Sign In", new_user_session_path, class: 'btn btn-primary'
+      or
+      = link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary'
+      today!

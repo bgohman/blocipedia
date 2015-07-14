@@ -26,7 +26,7 @@
     = form_for @wiki do |f|
       #epiceditor
         %script{:src => "app/assets/javascripts/epiceditor.min.js"}
-        var editor = new EpicEditor().load();
+        / var editor = new EpicEditor().load();
         .form-group
           = f.label :title
           = f.text_field :title, class: 'form-control', placeholder: "wiki title"
