@@ -4,13 +4,10 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def after_sign_in_path_for(resource)
     wikis_path
-  end
-
-  rescue_from Pundit::NotAuthorizedError do |exception|
-    redirect_to root_url, alert: exception.message
   end
  
    protected
@@ -19,4 +16,11 @@ class ApplicationController < ActionController::Base
      devise_parameter_sanitizer.for(:sign_up) << :name
      devise_parameter_sanitizer.for(:account_update) << :name
    end 
+
+   private
+
+    def user_not_authorized
+      flash[:error] = 'You are not authorized'
+      redirect_to(request.referrer || root_path)
+    end
 end

@@ -7,6 +7,14 @@ class CollaborationsController < ApplicationController
   def create
     @wiki = Wiki.find(params[:wiki_id])
     @other_user = User.find_by email: params[:collaboration][:user_id]
+    if @other_user == nil
+      flash[:notice] = "There is no registered user with that email address"
+      redirect_to edit_wiki_path(@wiki) and return  
+    end
+    if collaboration = Collaboration.find_by(user_id: @other_user.id, wiki_id: @wiki.id)
+      flash[:notice] = "This user is already collaborating on this wiki"
+      redirect_to edit_wiki_path(@wiki) and return
+    end
     @collaboration = Collaboration.new(collaboration_params)
     authorize @collaboration
     @collaboration.user_id = @other_user.id
@@ -37,4 +45,5 @@ class CollaborationsController < ApplicationController
     def collaboration_params
       params.require(:collaboration).permit(:wiki_id, :user_id)
     end
+
 end
