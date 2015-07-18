@@ -3,6 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
+
+
   $('#wiki_title').keyup (e) ->
     content = marked( $(this).val() )
     $('#title-preview').html(content)
