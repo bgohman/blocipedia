@@ -20,16 +20,9 @@
           %br
         = f.submit "Save", class: 'btn btn-success'
   .col-md-6
-    %h2 preview
-    = form_for @wiki do |f|
-      .form-group
-        = f.label :title
-        #title-preview
-          = f.text_field :title, class: 'form-control', placeholder: "wiki title"
-      .form-group
-        = f.label :body
-        #body-preview
-          = f.text_area :body, rows: 8, class: 'form-control', placeholder: "wiki body..."
+    #title-preview
+    #body-preview
+
 
 - if policy(Wiki.new).premium? && current_user == @wiki.user && @wiki.private?
   .row

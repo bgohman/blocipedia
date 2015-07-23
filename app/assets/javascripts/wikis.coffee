@@ -4,13 +4,18 @@
 
 $(document).ready ->
 
+  previewContent = (el, target) ->
+    content = marked( $(el).val())
+    $(target).html(content)
+
+  previewContent('#wiki_title', '#title-preview')
+  previewContent('#wiki_body', '#body-preview')
+
 
   $('#wiki_title').keyup (e) ->
-    content = marked( $(this).val() )
-    $('#title-preview').html(content)
+    previewContent('#wiki_title', '#title-preview')
 
   $('#wiki_body').keyup (e) ->
-    content = marked( $(this).val() )
-    $('#body-preview').html(content)
+    previewContent('#wiki_body', '#body-preview')
 
 
