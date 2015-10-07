@@ -6,4 +6,13 @@ module TestFactories
     user.save
     user
   end
+
+  def admin_user
+  	authenticated_user(role: 'admin')
+  end
+
+  def new_wiki(options={})
+    wiki_options = {title: "fake #{rand}", body: "fake #{rand} #{rand} paragraph", private: false}.merge(options)
+    Wiki.create(wiki_options)
+  end
 end

@@ -1,7 +1,7 @@
 class CollaborationsController < ApplicationController
 
   def new
-    @colloboration = Collaboration.new
+    @collaboration = Collaboration.new
   end
 
   def create
@@ -9,7 +9,7 @@ class CollaborationsController < ApplicationController
     @other_user = User.find_by email: params[:collaboration][:user_id]
     if @other_user == nil
       flash[:notice] = "There is no registered user with that email address"
-      redirect_to edit_wiki_path(@wiki) and return  
+      redirect_to edit_wiki_path(@wiki) and return
     end
     if collaboration = Collaboration.find_by(user_id: @other_user.id, wiki_id: @wiki.id)
       flash[:notice] = "This user is already collaborating on this wiki"
