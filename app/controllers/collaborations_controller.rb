@@ -12,7 +12,7 @@ class CollaborationsController < ApplicationController
       redirect_to edit_wiki_path(@wiki) and return
     end
     if collaboration = Collaboration.find_by(user_id: @other_user.id, wiki_id: @wiki.id)
-      flash[:notice] = "This user is already collaborating on this wiki"
+      flash[:notice] = "#{@other_user.name} is already collaborating on this wiki"
       redirect_to edit_wiki_path(@wiki) and return
     end
     @collaboration = Collaboration.new(collaboration_params)
